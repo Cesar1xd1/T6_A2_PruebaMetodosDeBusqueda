@@ -200,9 +200,15 @@ class Clase {
 			vectorMaestro[i]=(int) (Math.random() * 100);
 			vectorHash[i]=String.valueOf(vectorMaestro[i]);
 		}
+		BusquedaBinaria b = new BusquedaBinaria();
+		vectorMaestro = b.quicksort(vectorMaestro, 0, vectorMaestro.length-1);
+		for(int i=0;i<vectorMaestro.length;i++) {
+			vectorHash[i]=String.valueOf(vectorMaestro[i]);
+		}
+		
 		int vectorBin[] = vectorMaestro;
 		if(x==1) {
-			BusquedaBinaria b = new BusquedaBinaria();
+			
 			System.out.println("Vector: " + Arrays.toString(vectorBin));
 			System.out.println("========== Metodo de Busqueda Binaria ==========");
 			System.out.println("Ingresa el elemento a buscar:");
@@ -213,11 +219,16 @@ class Clase {
 			System.out.println("Vector: " + Arrays.toString(vectorHash));
 			System.out.println("========== Metodo de Funcion Hash ==========");
 			FuncionHASH fh = new FuncionHASH(vectorHash.length);
+			fh.tInicio = System.nanoTime();
 			fh.funcionHash(vectorHash, fh.arreglo);
 			fh.mostrar();
 			System.out.println("Ingresa el elemento a buscar");
 			int elemento = entrada.nextInt();
 			fh.buscarClave(String.valueOf(elemento));
+			fh.tFin = System.nanoTime();
+			System.out.println("Tiempo de ejecucion:"+(fh.tFin-fh.tInicio));
+			System.out.println("Numeor de Comparaciones = " + fh.comparaciones);
+			System.out.println("Numero de Pasadas = " + fh.pasadas);
 		}
 	}
 }
