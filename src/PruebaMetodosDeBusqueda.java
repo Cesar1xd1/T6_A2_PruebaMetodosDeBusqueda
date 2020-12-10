@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class BusquedaBinaria{
 	int pasadas;
@@ -149,7 +150,7 @@ class FuncionHASH{
 			contador++;
 			comparaciones++;
 			if (contador > 100) {
-				System.out.println("------Error-------");
+				System.out.println("No fue encontrado");
 				break;
 			}
 		}
@@ -166,17 +167,57 @@ class FuncionHASH{
 	}
 	
 }
-
+interface Correcion{
+	Scanner input = new Scanner(System.in);
+	
+	public static int validacion() {
+		int r = 0;
+		boolean e = false;
+		do {
+			try {
+				r = input.nextInt();
+			} catch (java.util.InputMismatchException h) {
+				System.out.println("Ups... Solo numeros porfavor, intenta de nuevo:");
+				input.nextLine();
+				e=true;
+			}
+			if (r>0) {
+				e=false;
+			}else {
+				System.out.println("Solo numeros mayores a 0 por favor, intenta de nuevo:");
+				e=true;
+			}
+		}while(e);
+		return r;
+	}
+}
 class Clase {
+	Scanner entrada = new Scanner (System.in);
 	public void trabajo(int x) {
+		String vectorHash[]=new String[100];
 		int vectorMaestro[] = new int [100];
 		for(int i=0;i<vectorMaestro.length;i++) {
 			vectorMaestro[i]=(int) (Math.random() * 100);
+			vectorHash[i]=String.valueOf(vectorMaestro[i]);
 		}
-		
+		int vectorBin[] = vectorMaestro;
 		if(x==1) {
 			BusquedaBinaria b = new BusquedaBinaria();
-			
+			System.out.println("Vector: " + Arrays.toString(vectorBin));
+			System.out.println("========== Metodo de Busqueda Binaria ==========");
+			System.out.println("Ingresa el elemento a buscar:");
+			int elemento = entrada.nextInt();
+			b.resultadosBinarios(vectorBin, elemento);
+		}
+		else if(x==2) {
+			System.out.println("Vector: " + Arrays.toString(vectorHash));
+			System.out.println("========== Metodo de Funcion Hash ==========");
+			FuncionHASH fh = new FuncionHASH(vectorHash.length);
+			fh.funcionHash(vectorHash, fh.arreglo);
+			fh.mostrar();
+			System.out.println("Ingresa el elemento a buscar");
+			int elemento = entrada.nextInt();
+			fh.buscarClave(String.valueOf(elemento));
 		}
 	}
 }
@@ -184,6 +225,18 @@ class Clase {
 public class PruebaMetodosDeBusqueda {
 
 	public static void main(String[] args) {
+		Clase x = new Clase();
+		int opcion =0;
+		do {
+			System.out.println("========== MENU ==========");
+			System.out.println("Digite 1 para La busqueda Binaria");
+			System.out.println("Digite 2 para la busqueda por Funcion Hash");
+			System.out.println("Digite 3 para ***SALIR***");
+			opcion = Correcion.validacion();
+			x.trabajo(opcion);	
+		}while(opcion!=3);
+		
+		
 		
 
 	}
