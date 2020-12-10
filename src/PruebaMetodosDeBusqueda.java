@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class BusquedaBinaria{
 	int pasadas;
 	int comparaciones;
@@ -67,6 +69,117 @@ class BusquedaBinaria{
 	}
 
 	}
+class FuncionHASH{
+	long tInicio;
+	long tFin;
+	int pasadas;
+	int comparaciones;
+	String[] arreglo;
+	int tamaño;
+	
+	public FuncionHASH(int tam) {
+		tamaño = tam;
+		arreglo = new String[tam];
+		Arrays.fill(arreglo, "-1");
+	}
+	public void funcionHash(String[] cadArreglo, String[] arreglo) {
+		int i;
+		// Ciclo para asiganar a la varible elemento el valor de la cadena
+		for (i = 0; i < cadArreglo.length; i++) {
+			pasadas++;
+			String elemento = cadArreglo[i];
+			int indiceArreglo = Integer.parseInt(elemento) % 20;
+			System.out.println("Indice: " + indiceArreglo + " para " + elemento);
+			// Mpetodo para solucionar una colision
+			while (arreglo[indiceArreglo] != "-1") {
+				comparaciones++;
+				pasadas++;
+				indiceArreglo++;
+				System.out.println("Colisión en el indice: " + (indiceArreglo - 1) + " cambiando por " + indiceArreglo);
+				indiceArreglo %= tamaño; 
+			}
+			arreglo[indiceArreglo] = elemento;
+		}
+	
+	}
+
+	// Metodo para mostrar la funcion hash
+	public void mostrar() {
+		int incremento = 0;
+		int j;
+
+		for (int i = 0; i < 1; i++) {
+			incremento += 100;
+			System.out.println("");
+			System.out.println("------------------------------------------------------------------");
+			for (j = incremento - 100; j < incremento; j++) {
+				System.out.format(" | %3s " + " ", j);
+			}
+			System.out.println(" | ");
+			System.out.println();
+			for (j = incremento - 100; j < incremento; j++) {
+				if (arreglo[j].equals("-1")) {
+					System.out.println(" | ");
+				} else {
+					System.out.print(String.format(" | %3s" + " ", arreglo[j]));
+				}
+			}
+
+			System.out.println("|");
+			System.out.println("------------------------------------------------------------------");
+			System.out.println("");
+		}
+	}
+
+	// Metodo para buscar una clave de los elementos
+	public String buscarClave(String elemento) {
+		
+		int indiceArrglo = Integer.parseInt(elemento) % 99;
+		int contador = 0;
+	
+		while (arreglo[indiceArrglo] != "-1") {
+			pasadas++;
+			comparaciones++;
+			if (arreglo[indiceArrglo].equals(elemento)) {
+				System.out.println("Elemento " + elemento + " se encontro en el indice " + indiceArrglo);
+				return arreglo[indiceArrglo];
+			}
+			indiceArrglo++;
+			indiceArrglo %= tamaño;
+			contador++;
+			comparaciones++;
+			if (contador > 100) {
+				System.out.println("------Error-------");
+				break;
+			}
+		}
+		return null;
+	}
+	public void mostrarHash(String elemento) {
+		tInicio = System.nanoTime();
+		buscarClave(elemento);
+		tInicio = System.nanoTime();
+		System.out.println("Tiempo de ejecucion:"+(tFin-tInicio));
+		System.out.println("Numeor de Comparaciones = " + comparaciones);
+		System.out.println("Numero de Pasadas = " + pasadas);
+		
+	}
+	
+}
+
+class Clase {
+	public void trabajo(int x) {
+		int vectorMaestro[] = new int [100];
+		for(int i=0;i<vectorMaestro.length;i++) {
+			vectorMaestro[i]=(int) (Math.random() * 100);
+		}
+		
+		if(x==1) {
+			BusquedaBinaria b = new BusquedaBinaria();
+			
+		}
+	}
+}
 
 public class PruebaMetodosDeBusqueda {
 
