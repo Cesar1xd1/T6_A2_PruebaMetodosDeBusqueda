@@ -87,14 +87,12 @@ class FuncionHASH{
 		int i;
 		// Ciclo para asiganar a la varible elemento el valor de la cadena
 		for (i = 0; i < cadArreglo.length; i++) {
-			pasadas++;
+			
 			String elemento = cadArreglo[i];
 			int indiceArreglo = Integer.parseInt(elemento) % 20;
 			System.out.println("Indice: " + indiceArreglo + " para " + elemento);
 			// Mpetodo para solucionar una colision
 			while (arreglo[indiceArreglo] != "-1") {
-				comparaciones++;
-				pasadas++;
 				indiceArreglo++;
 				System.out.println("Colisión en el indice: " + (indiceArreglo - 1) + " cambiando por " + indiceArreglo);
 				indiceArreglo %= tamaño; 
@@ -229,6 +227,9 @@ class Clase {
 			System.out.println("Tiempo de ejecucion:"+(fh.tFin-fh.tInicio));
 			System.out.println("Numeor de Comparaciones = " + fh.comparaciones);
 			System.out.println("Numero de Pasadas = " + fh.pasadas);
+		}
+		else if(x==3) {
+			System.out.println("Gracias por jugar");
 		}
 	}
 }
